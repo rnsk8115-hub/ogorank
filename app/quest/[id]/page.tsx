@@ -50,8 +50,8 @@ export default async function QuestDetailPage(props: { params: Promise<{ id: str
               <p>{q.genre}</p>
             </div>
             <div>
-              <span className="text-xs font-mono" style={{ color: 'var(--color-text-dim)' }}>予算</span>
-              <p>{formatCurrency(q.budget)}</p>
+              <span className="text-xs font-mono" style={{ color: 'var(--color-text-dim)' }}>ジャンル</span>
+              <p>{q.genre}</p>
             </div>
             <div>
               <span className="text-xs font-mono" style={{ color: 'var(--color-text-dim)' }}>デート日</span>

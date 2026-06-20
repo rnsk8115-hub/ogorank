@@ -64,7 +64,7 @@ export default function QuestList({ quests }: QuestListProps) {
                   </>
                 ) : (
                   <div className="font-mono text-sm" style={{ color: 'var(--color-text-dim)' }}>
-                    {formatCurrency(quest.budget)}
+                    精算待ち
                   </div>
                 )}
               </div>
