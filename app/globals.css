@@ -1,34 +1,21 @@
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+@import 'tailwindcss';
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
+@theme {
+  --color-base-dark: #0a0a0c;
+  --color-base-mid: #0f1015;
+  --color-base-light: #1a1b22;
+  --color-cyan: #00f0ff;
+  --color-cyan-dim: #00b8c4;
+  --color-magenta: #ff007f;
+  --color-magenta-dim: #c4005f;
+  --color-god-gold: #d4af37;
+  --color-god-gold-dim: #a8872a;
+  --color-text-primary: #e0e8f0;
+  --color-text-dim: #6b7a8d;
+  --color-border: rgba(0, 240, 255, 0.15);
 
-html {
-  height: 100%;
-}
-
-html,
-body {
-  max-width: 100vw;
-  overflow-x: hidden;
-}
-
-body {
-  min-height: 100%;
-  display: flex;
-  flex-direction: column;
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  --font-mono: 'Share Tech Mono', 'Courier New', monospace;
+  --font-body: 'Noto Sans JP', 'sans-serif';
 }
 
 * {
@@ -37,13 +24,340 @@ body {
   margin: 0;
 }
 
+html {
+  background-color: var(--color-base-dark);
+  color: var(--color-text-primary);
+  font-family: var(--font-body);
+  overflow-x: hidden;
+}
+
+body {
+  min-height: 100vh;
+  background-color: var(--color-base-dark);
+  background-image:
+    linear-gradient(rgba(0, 240, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 240, 255, 0.03) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
 a {
   color: inherit;
   text-decoration: none;
 }
 
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
-  }
+/* ===== HUDスタイル共通 ===== */
+.hud-card {
+  background: rgba(15, 16, 21, 0.85);
+  border: 1px solid var(--color-border);
+  backdrop-filter: blur(8px);
+  position: relative;
+  overflow: hidden;
+}
+
+.hud-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--color-cyan), transparent);
+  opacity: 0.6;
+}
+
+.hud-card-magenta::before {
+  background: linear-gradient(90deg, transparent, var(--color-magenta), transparent);
+}
+
+.hud-card-god::before {
+  background: linear-gradient(90deg, transparent, var(--color-god-gold), transparent);
+}
+
+/* ===== ネオングロウボタン ===== */
+.btn-cyan {
+  background: transparent;
+  border: 1px solid var(--color-cyan);
+  color: var(--color-cyan);
+  font-family: var(--font-mono);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.btn-cyan:hover {
+  background: rgba(0, 240, 255, 0.1);
+  box-shadow: 0 0 20px rgba(0, 240, 255, 0.3), inset 0 0 20px rgba(0, 240, 255, 0.05);
+}
+
+.btn-magenta {
+  background: transparent;
+  border: 1px solid var(--color-magenta);
+  color: var(--color-magenta);
+  font-family: var(--font-mono);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.btn-magenta:hover {
+  background: rgba(255, 0, 127, 0.1);
+  box-shadow: 0 0 20px rgba(255, 0, 127, 0.3), inset 0 0 20px rgba(255, 0, 127, 0.05);
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, rgba(0, 240, 255, 0.15), rgba(0, 240, 255, 0.05));
+  border: 1px solid var(--color-cyan);
+  color: var(--color-cyan);
+  font-family: var(--font-mono);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.btn-primary:hover {
+  background: linear-gradient(135deg, rgba(0, 240, 255, 0.25), rgba(0, 240, 255, 0.1));
+  box-shadow: 0 0 30px rgba(0, 240, 255, 0.4);
+}
+
+.btn-primary:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.btn-god {
+  background: linear-gradient(135deg, rgba(212, 175, 55, 0.2), rgba(212, 175, 55, 0.05));
+  border: 1px solid var(--color-god-gold);
+  color: var(--color-god-gold);
+  font-family: var(--font-mono);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.btn-god:hover {
+  background: linear-gradient(135deg, rgba(212, 175, 55, 0.3), rgba(212, 175, 55, 0.1));
+  box-shadow: 0 0 30px rgba(212, 175, 55, 0.5);
+}
+
+/* ===== テキストグロウ ===== */
+.text-glow-cyan {
+  text-shadow: 0 0 10px rgba(0, 240, 255, 0.8), 0 0 20px rgba(0, 240, 255, 0.4);
+}
+
+.text-glow-magenta {
+  text-shadow: 0 0 10px rgba(255, 0, 127, 0.8), 0 0 20px rgba(255, 0, 127, 0.4);
+}
+
+.text-glow-gold {
+  text-shadow: 0 0 10px rgba(212, 175, 55, 0.8), 0 0 20px rgba(212, 175, 55, 0.4);
+}
+
+.font-mono {
+  font-family: var(--font-mono);
+}
+
+/* ===== HUDインプット ===== */
+.hud-input {
+  background: rgba(0, 0, 0, 0.5);
+  border: 1px solid var(--color-border);
+  color: var(--color-text-primary);
+  font-family: var(--font-body);
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border-radius: 4px;
+}
+
+.hud-input:focus {
+  border-color: var(--color-cyan);
+  box-shadow: 0 0 12px rgba(0, 240, 255, 0.2);
+}
+
+.hud-input::placeholder {
+  color: var(--color-text-dim);
+}
+
+.hud-select {
+  background: rgba(0, 0, 0, 0.5);
+  border: 1px solid var(--color-border);
+  color: var(--color-text-primary);
+  font-family: var(--font-body);
+  outline: none;
+  appearance: none;
+  transition: border-color 0.2s ease;
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border-radius: 4px;
+}
+
+.hud-select:focus {
+  border-color: var(--color-cyan);
+  box-shadow: 0 0 12px rgba(0, 240, 255, 0.2);
+}
+
+/* ===== ランクバッジ ===== */
+.rank-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  border: 1px solid currentColor;
+  padding: 0.25rem 0.75rem;
+  font-size: 0.75rem;
+}
+
+/* ===== EXPゲージ ===== */
+.exp-bar-track {
+  background: rgba(0, 0, 0, 0.5);
+  border: 1px solid var(--color-border);
+  height: 8px;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.exp-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--color-cyan-dim), var(--color-cyan));
+  box-shadow: 0 0 8px rgba(0, 240, 255, 0.6);
+  border-radius: 4px;
+  transition: width 1s ease;
+}
+
+/* ===== GOD演出アニメーション ===== */
+@keyframes god-overlay-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes digital-noise {
+  0%, 100% { opacity: 0.04; transform: translateY(0); }
+  20% { opacity: 0.12; transform: translateY(-2px); }
+  40% { opacity: 0.06; transform: translateY(1px); }
+  60% { opacity: 0.14; transform: translateY(-1px); }
+  80% { opacity: 0.08; transform: translateY(2px); }
+}
+
+@keyframes scanline-fast {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(100vh); }
+}
+
+@keyframes shockwave-cyan {
+  0% { transform: translate(-50%, -50%) scale(0); opacity: 1; }
+  100% { transform: translate(-50%, -50%) scale(5); opacity: 0; }
+}
+
+@keyframes shockwave-magenta {
+  0% { transform: translate(-50%, -50%) scale(0); opacity: 0.8; }
+  100% { transform: translate(-50%, -50%) scale(4); opacity: 0; }
+}
+
+@keyframes god-emblem-drop {
+  0% { transform: translateY(-300px) rotate(720deg) scale(0); opacity: 0; }
+  60% { transform: translateY(15px) rotate(5deg) scale(1.1); opacity: 1; }
+  80% { transform: translateY(-8px) rotate(-2deg) scale(0.97); opacity: 1; }
+  100% { transform: translateY(0) rotate(0deg) scale(1); opacity: 1; }
+}
+
+@keyframes gold-pulse {
+  0%, 100% { filter: drop-shadow(0 0 8px #d4af37) drop-shadow(0 0 16px rgba(212,175,55,0.4)); }
+  50% { filter: drop-shadow(0 0 24px #d4af37) drop-shadow(0 0 48px rgba(212,175,55,0.6)) drop-shadow(0 0 72px rgba(212,175,55,0.3)); }
+}
+
+@keyframes typewriter {
+  from { width: 0; }
+  to { width: 100%; }
+}
+
+@keyframes magenta-flicker {
+  0%, 100% { opacity: 1; text-shadow: 0 0 10px #ff007f, 0 0 20px #ff007f, 0 0 40px #ff007f; }
+  25% { opacity: 0.7; text-shadow: 0 0 5px #ff007f; }
+  50% { opacity: 1; text-shadow: 0 0 15px #ff007f, 0 0 30px #ff007f, 0 0 60px #ff007f; }
+  75% { opacity: 0.85; text-shadow: 0 0 8px #ff007f, 0 0 16px #ff007f; }
+}
+
+@keyframes particle-fall {
+  0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+  100% { transform: translateY(300px) rotate(720deg); opacity: 0; }
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+
+/* ===== ユーティリティ ===== */
+.animate-fade-in-up {
+  animation: fadeInUp 0.5s ease forwards;
+}
+
+.animate-blink {
+  animation: blink 1.5s ease infinite;
+}
+
+.animate-gold-pulse {
+  animation: gold-pulse 2s ease infinite;
+}
+
+.animate-magenta-flicker {
+  animation: magenta-flicker 0.8s ease infinite;
+}
+
+/* ===== GOD演出コンポーネント固有 ===== */
+.god-overlay {
+  animation: god-overlay-in 0.5s ease forwards;
+}
+
+.god-emblem {
+  animation: god-emblem-drop 1.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+.god-shockwave-cyan {
+  position: absolute;
+  border: 2px solid var(--color-cyan);
+  border-radius: 50%;
+  width: 100px;
+  height: 100px;
+  top: 50%;
+  left: 50%;
+  animation: shockwave-cyan 0.8s ease-out forwards;
+  box-shadow: 0 0 20px var(--color-cyan);
+}
+
+.god-shockwave-magenta {
+  position: absolute;
+  border: 2px solid var(--color-magenta);
+  border-radius: 50%;
+  width: 80px;
+  height: 80px;
+  top: 50%;
+  left: 50%;
+  animation: shockwave-magenta 1s ease-out forwards;
+  animation-delay: 0.2s;
+  opacity: 0;
+  box-shadow: 0 0 20px var(--color-magenta);
+}
+
+.god-typewriter {
+  overflow: hidden;
+  white-space: nowrap;
+  border-right: 2px solid var(--color-cyan);
+  animation: typewriter 1.5s steps(20) forwards;
+}
+
+.god-noise {
+  animation: digital-noise 0.1s linear infinite;
 }
