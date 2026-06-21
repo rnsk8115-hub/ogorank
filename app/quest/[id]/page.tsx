@@ -29,7 +29,7 @@ export default async function QuestDetailPage(props: { params: Promise<{ id: str
     .single()
 
   const q = quest as Quest
-  const appUrl = process.env.NEXT_PUBLIC_APP_URL ?? ''
+  const appUrl = (process.env.NEXT_PUBLIC_APP_URL ?? 'https://ogorank.vercel.app').trim()
   const shareUrl = `${appUrl}/q/${q.share_token}`
 
   return (
