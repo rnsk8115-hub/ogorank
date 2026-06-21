@@ -6,7 +6,7 @@ export function calcMaleRatio(totalAmount: number, malePayment: number): number 
 }
 
 export function generateShareToken(): string {
-  return crypto.randomUUID().replace(/-/g, '')
+  return crypto.randomUUID().replace(/-/g, '').slice(0, 16)
 }
 
 export function getQuestExpiresAt(): string {
