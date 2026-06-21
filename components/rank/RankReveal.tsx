@@ -23,7 +23,7 @@ export default function RankReveal({ profile, highRatingRatio }: Props) {
   const [expDisplay, setExpDisplay] = useState(0)
 
   const color = RANK_COLORS[profile.rank]
-  const nextRank = getNextRankInfo(profile.rank, profile.total_exp)
+  const rankInfo = getNextRankInfo(profile.total_exp, profile.rank)
 
   useEffect(() => {
     const t1 = setTimeout(() => setPhase(1), 100)
@@ -101,17 +101,17 @@ export default function RankReveal({ profile, highRatingRatio }: Props) {
               </div>
             </div>
 
-            {nextRank && (
+            {rankInfo.nextRank && (
               <div>
                 <div className="flex justify-between text-xs font-mono mb-2">
-                  <span style={{ color: 'var(--color-text-dim)' }}>→ {nextRank.label}</span>
-                  <span style={{ color: 'var(--color-text-dim)' }}>残り {nextRank.remaining.toLocaleString()} EXP</span>
+                  <span style={{ color: 'var(--color-text-dim)' }}>→ {RANK_LABELS[rankInfo.nextRank]}</span>
+                  <span style={{ color: 'var(--color-text-dim)' }}>残り {rankInfo.remaining.toLocaleString()} EXP</span>
                 </div>
                 <div className="h-2 rounded-full overflow-hidden" style={{ background: 'rgba(255,255,255,0.08)' }}>
                   <div
                     className="h-full rounded-full"
                     style={{
-                      width: phase >= 2 ? `${nextRank.progress}%` : '0%',
+                      width: phase >= 2 ? `${rankInfo.progress}%` : '0%',
                       background: `linear-gradient(90deg, ${color}, ${color}aa)`,
                       boxShadow: `0 0 8px ${color}`,
                       transition: 'width 1.2s cubic-bezier(0.16,1,0.3,1) 0.4s',
