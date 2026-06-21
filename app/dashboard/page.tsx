@@ -40,8 +40,8 @@ export default async function DashboardPage() {
         <GodRankUpModal />
       )}
 
-      <main className="max-w-2xl mx-auto px-4 py-8 space-y-6">
-        <div className="hud-card hud-card-god rounded-lg p-6">
+      <main className="max-w-2xl mx-auto px-5 py-8 space-y-7">
+        <div className="hud-card hud-card-god rounded-xl p-7">
           <div className="flex items-start justify-between mb-4">
             <div>
               <div className="font-mono text-xs mb-1" style={{ color: 'var(--color-text-dim)' }}>

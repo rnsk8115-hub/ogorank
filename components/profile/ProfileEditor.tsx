@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import Image from 'next/image'
+import { createClient } from '@/lib/supabase/client'
 import type { Profile } from '@/lib/types'
 
 interface ProfileEditorProps {
@@ -97,8 +98,21 @@ export default function ProfileEditor({ profile }: ProfileEditorProps) {
         </p>
       )}
 
-      <button type="submit" disabled={loading} className="btn-primary w-full py-3 rounded text-sm">
+      <button type="submit" disabled={loading} className="btn-primary w-full py-3 rounded text-sm cyber-btn">
         {loading ? '[ 保存中... ]' : '[ 保存する ]'}
+      </button>
+
+      <button
+        type="button"
+        onClick={async () => {
+          const supabase = createClient()
+          await supabase.auth.signOut()
+          window.location.href = '/'
+        }}
+        className="w-full py-3 rounded text-sm font-mono cyber-btn"
+        style={{ border: '1px solid rgba(255,0,127,0.3)', color: 'rgba(255,0,127,0.6)' }}
+      >
+        [ ログアウト ]
       </button>
     </form>
   )

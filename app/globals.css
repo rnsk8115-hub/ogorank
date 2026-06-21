@@ -361,3 +361,44 @@ a {
 .god-noise {
   animation: digital-noise 0.1s linear infinite;
 }
+
+/* ===== サイバータッチ演出 ===== */
+@keyframes cyber-flash {
+  0% { box-shadow: 0 0 0px rgba(0,240,255,0); }
+  30% { box-shadow: 0 0 24px rgba(0,240,255,0.7), inset 0 0 12px rgba(0,240,255,0.2); }
+  100% { box-shadow: 0 0 0px rgba(0,240,255,0); }
+}
+
+@keyframes cyber-ripple {
+  0% { transform: scale(0.95); opacity: 1; }
+  100% { transform: scale(1.04); opacity: 0.8; }
+}
+
+.cyber-btn {
+  position: relative;
+  -webkit-tap-highlight-color: transparent;
+  transition: transform 0.1s ease, opacity 0.1s ease;
+}
+
+.cyber-btn:active {
+  transform: scale(0.96);
+  animation: cyber-flash 0.3s ease forwards;
+}
+
+.btn-primary.cyber-btn:active,
+.btn-cyan.cyber-btn:active {
+  animation: cyber-flash 0.3s ease forwards;
+  transform: scale(0.96);
+}
+
+.btn-primary {
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* ===== モバイル全体の余白改善 ===== */
+@media (max-width: 640px) {
+  .mobile-px {
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+  }
+}
