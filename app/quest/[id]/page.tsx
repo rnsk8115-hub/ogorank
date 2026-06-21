@@ -1,6 +1,5 @@
 import { createClient } from '@/lib/supabase/server'
 import { redirect, notFound } from 'next/navigation'
-import { headers } from 'next/headers'
 import Navbar from '@/components/layout/Navbar'
 import SettlementForm from '@/components/quest/SettlementForm'
 import ShareButton from '@/components/quest/ShareButton'
@@ -30,10 +29,10 @@ export default async function QuestDetailPage(props: { params: Promise<{ id: str
     .single()
 
   const q = quest as Quest
-  const headersList = await headers()
-  const host = headersList.get('host') ?? 'ogorank.vercel.app'
-  const protocol = host.includes('localhost') ? 'http' : 'https'
-  const shareUrl = `${protocol}://${host}/q/${q.share_token}`
+  const baseUrl = process.env.NODE_ENV === 'development'
+    ? 'http://localhost:3001'
+    : 'https://ogorank.vercel.app'
+  const shareUrl = `${baseUrl}/q/${q.share_token}`
 
   return (
     <>
