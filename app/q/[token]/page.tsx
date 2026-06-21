@@ -1,4 +1,4 @@
-import { createClient } from '@/lib/supabase/server'
+import { createServiceClient } from '@/lib/supabase/server'
 import { notFound } from 'next/navigation'
 import Image from 'next/image'
 import NeonBadge from '@/components/ui/NeonBadge'
@@ -10,7 +10,7 @@ import { RANK_LABELS } from '@/lib/types'
 
 export default async function PublicQuestPage(props: { params: Promise<{ token: string }> }) {
   const { token } = await props.params
-  const supabase = await createClient()
+  const supabase = createServiceClient()
 
   const { data: quest } = await supabase
     .from('quests')
