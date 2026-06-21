@@ -10,7 +10,7 @@ import { RANK_LABELS } from '@/lib/types'
 
 export default async function PublicQuestPage(props: { params: Promise<{ token: string }> }) {
   const { token } = await props.params
-  const supabase = createServiceClient()
+  const supabase = await createServiceClient()
 
   const { data: quest } = await supabase
     .from('quests')
